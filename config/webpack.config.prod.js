@@ -41,6 +41,8 @@ module.exports = merge(webpackCommon, {
 			},
 		]
 	},
+	externals: { // 配置通过第三方cdn引入
+	},
 	optimization: { // 分包
 		splitChunks: {//可以在这里直接设置抽离代码的参数，最后将符合条件的代码打包至一个公共文件
 			maxInitialRequests: 10,

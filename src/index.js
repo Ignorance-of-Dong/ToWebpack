@@ -2,8 +2,7 @@ import './style/index.css'
 import './style/index.scss'
 import ReactDOM from 'react-dom';
 import React from 'react'
-console.log(111)
-document.write(111)
+import Templat from './c.tsx'
 
 let foo = () => 1;
 
@@ -29,7 +28,7 @@ console.log(new Name().suert())
 console.log(React)
 const element = <h1>Hello, world!</h1>;
 ReactDOM.render(
-  element,
+  <Templat/>,
   document.getElementById('root')
 );
 
@@ -50,18 +49,21 @@ new Set(arr)
 console.log(arr)
 
 
-// function* helloWorldGenerator() {
-//   yield 'hello';
-//   yield 'world';
-//   return 'ending';
-// }
-
-// var hw = helloWorldGenerator();
-
-
-// hw.next()
-@log
-function logs(s){
-  console.log(s)
+function* helloWorldGenerator() {
+  yield 'hello';
+  yield 'world';
+  return 'ending';
 }
+
+var hw = helloWorldGenerator();
+
+
+hw.next()
+@testable
+class MyClass {};
+
+function testable(target) {
+    target.isTestable = true;
+}
+console.log(MyClass.isTestable, 'ss')
 

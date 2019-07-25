@@ -40,15 +40,28 @@ module.exports = {
 				]
 			},
 			{
-				test: /\.(js|jsx)$/,
+				test: /\.(js|jsx|ts|tsx)$/,
 				use: {
 					loader: 'babel-loader',
 					options: {
 						presets: [
 							"@babel/preset-env",
+							"@babel/preset-typescript",
 							"@babel/preset-react",
-							"@babel/preset-stage-0",
-							// "@babel/plugin-transform-runtime",
+						],
+						plugins: [
+							[
+								"@babel/plugin-proposal-decorators",{legacy: true}
+							],
+							[
+								"@babel/transform-runtime",
+							],
+							[
+								"import", {
+									"libraryName": "antd",
+									"style": true
+								}
+							]
 						]
 					}
 				},
