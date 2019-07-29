@@ -1,13 +1,10 @@
-// const webpack=require('webpack')
 const path = require('path')
-const fs = require('fs');
-const webpack = require('webpack')
 const merge = require('webpack-merge')
 const webpackCommon = require('./webpack.config.common')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin') // 显示进度条
 const ROOT_PATH = process.cwd();
 const DIST_PATH = path.resolve(ROOT_PATH, "dist");
-const Config = require('../web.config.js')
+const Config = require('../web.config.ts')
 const chalk = require('react-dev-utils/chalk')
 
 
@@ -32,7 +29,7 @@ module.exports = merge(webpackCommon, {
 	plugins: [
 		new ProgressBarPlugin({
 			format: ' Avtion [:bar] ' + ':percent' + ' (:elapsed seconds)',
-			clear: true,
+			clear: false,
 			callback: () => {
 				console.log(' \n 成功启动服务！！！😊😊😊')
 				console.log(` \n Local:            http://localhost:${Config.Serverport}/`)

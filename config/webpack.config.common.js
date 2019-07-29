@@ -3,11 +3,11 @@
  */
 const path = require('path')
 const webpack = require('webpack')
-// const dashboard = new Dashboard();
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const {ComponentLibrary} = require('../web.config.ts')
 module.exports = {
 	entry: {
-		build: path.resolve(process.cwd(), "src/index.js")
+		build: path.resolve(process.cwd(), "src/index.tsx")
 	},
 	output: {
 		// 输出目录
@@ -40,26 +40,47 @@ module.exports = {
 				]
 			},
 			{
+				test: /\.(le)ss$/,
+				// 使用 'style-loader','css-loader'
+				use: [
+					'style-loader',
+					'css-loader',
+					{
+						loader: 'postcss-loader',
+						options: {
+							ident: 'postcss',
+							plugins: [
+								require('autoprefixer'),
+							]
+						}
+					},
+					'less-loader'
+				]
+			},
+			{
 				test: /\.(js|jsx|ts|tsx)$/,
 				use: {
 					loader: 'babel-loader',
 					options: {
 						presets: [
+							"@babel/preset-react",
 							"@babel/preset-env",
 							"@babel/preset-typescript",
-							"@babel/preset-react",
 						],
 						plugins: [
 							[
-								"@babel/plugin-proposal-decorators",{legacy: true}
+								"@babel/plugin-proposal-decorators",{"legacy": true}
 							],
 							[
-								"@babel/transform-runtime",
+								"@babel/plugin-proposal-class-properties",
 							],
+							["@babel/plugin-transform-classes",{"loose": true}],
+							["@babel/plugin-transform-runtime"],
 							[
 								"import", {
-									"libraryName": "antd",
-									"style": true
+									"libraryName": ComponentLibrary,
+									"libraryDirectory": 'es',
+	     						"style": 'css',
 								}
 							]
 						]
@@ -96,6 +117,12 @@ module.exports = {
 	plugins: [
 		new HtmlWebpackPlugin({ // 生成html文件
 			filename: 'index.html', // 最终创建的文件名
+			minify: {
+				caseSensitive:false,
+				collapseWhitespace:true,
+				removeAttributeQuotes:true,
+				removeComments:true
+			},
 			template: path.resolve(process.cwd(), "public/index.html"), // 指定模板路径
 		}),
 		new webpack.HotModuleReplacementPlugin(), // 对文件实现热更新

@@ -8,6 +8,8 @@ const UglifyJsPlugin = require("uglifyjs-webpack-plugin"); // 压缩js代码
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin") // 压缩css，将多余的css注释和重复代码去除
 const ROOT_PATH = process.cwd(); // 获取到当前node运行的进程目录
 const DIST_PATH = path.resolve(ROOT_PATH, "dist"); // 获取到dist目录
+const ProgressBarPlugin = require('progress-bar-webpack-plugin') // 显示进度条
+const chalk = require('react-dev-utils/chalk')
 module.exports = merge(webpackCommon, {
 	mode: 'production',
 	output: {
@@ -52,8 +54,6 @@ module.exports = merge(webpackCommon, {
 					test: /\.js/,//匹配规则
 					name: 'common/common',
 					chunks: 'all',
-					minSize: 1,
-					minChunks: 1,
 					priority: 1//设置匹配优先级，数字越小，优先级越低
 				},
 				vendor: {
@@ -76,6 +76,10 @@ module.exports = merge(webpackCommon, {
 		]
 	},
 	plugins: [
+		new ProgressBarPlugin({
+			format: '  build [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed seconds)',
+			clear: false
+		}),
 		new CleanWebpackPlugin(), // 清除上一次打包后的旧版文件
 		new MiniCssExtractPlugin({
 			// 与webpackoptions.output中相同选项类似的选项
@@ -83,6 +87,6 @@ module.exports = merge(webpackCommon, {
 			filename: 'styles/[id].[hash].css',
 			chunkFilename: '[id].[hash].css'
 		}),
-		new OptimizeCSSAssetsPlugin()
+		new OptimizeCSSAssetsPlugin(),
 	]
 }) 

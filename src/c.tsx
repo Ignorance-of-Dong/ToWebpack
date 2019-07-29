@@ -1,89 +1,31 @@
-import React from 'react'
-import { Slider, InputNumber, Row, Col } from 'antd';
-
-class IntegerStep extends React.Component {
-  state = {
-    inputValue: 1,
-  };
-
-  onChange = value => {
-    this.setState({
-      inputValue: value,
-    });
-  };
-
+import * as React from 'react'
+import { List, Switch } from 'antd-mobile';
+import { createForm } from 'rc-form';
+interface IProps {
+  [propName: string]: any;
+}
+class IntegerStep extends React.Component<IProps, any> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      checked: false,
+      checked1: true,
+    };
+  }
   render() {
-    const { inputValue } = this.state;
-    return (
-      <Row>
-        <Col span={12}>
-          <Slider
-            min={1}
-            max={20}
-            onChange={this.onChange}
-            value={typeof inputValue === 'number' ? inputValue : 0}
-          />
-        </Col>
-        <Col span={4}>
-          <InputNumber
-            min={1}
-            max={20}
-            style={{ marginLeft: 16 }}
-            value={inputValue}
-            onChange={this.onChange}
-          />
-        </Col>
-      </Row>
-    );
+    let {checked} = this.state
+    const { getFieldProps } = this.props.form;
+    return <List.Item
+    extra={<Switch
+      {...getFieldProps('Switch7', {
+        initialValue: true,
+        valuePropName: 'checked',
+      })}
+      platform="ios"
+    />}
+  >Style for iOS</List.Item>
   }
 }
-
-class DecimalStep extends React.Component {
-  state = {
-    inputValue: 0,
-  };
-
-  onChange = value => {
-    if (Number.isNaN(value)) {
-      return;
-    }
-    this.setState({
-      inputValue: value,
-    });
-  };
-
-  render() {
-    const { inputValue } = this.state;
-    return (
-      <Row>
-        <Col span={12}>
-          <Slider
-            min={0}
-            max={1}
-            onChange={this.onChange}
-            value={typeof inputValue === 'number' ? inputValue : 0}
-            step={0.01}
-          />
-        </Col>
-        <Col span={4}>
-          <InputNumber
-            min={0}
-            max={1}
-            style={{ marginLeft: 16 }}
-            step={0.01}
-            value={inputValue}
-            onChange={this.onChange}
-          />
-        </Col>
-      </Row>
-    );
-  }
-}
-
-ReactDOM.render(
-  <div>
-    <IntegerStep />
-    <DecimalStep />
-  </div>,
-  mountNode,
-);
+// ReactDOM.render(</><IntegerStep/><=/>=, document.getElementById("root"));
+const Se = createForm()(IntegerStep);
+export default Se

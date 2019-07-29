@@ -1,8 +1,18 @@
+/*
+ * @Author: Mr.zheng
+ * @Date: 2019-07-16 09:54:09
+ * @LastEditors: OBKoro1
+ * @LastEditTime: 2019-07-29 15:29:19
+ * @Description: 测试高级语法
+ */
 import './style/index.css'
 import './style/index.scss'
-import ReactDOM from 'react-dom';
-import React from 'react'
-import Templat from './c.tsx'
+import * as ReactDOM from 'react-dom';
+import * as React from 'react'
+import IntegerStep from './c'
+
+
+
 
 let foo = () => 1;
 
@@ -20,17 +30,17 @@ let objs = {
 console.log(foo())
 
 class Name {
+  state: {
+    a: 1
+  }
   suert() {
     return 1123599999
   }
 }
 console.log(new Name().suert())
 console.log(React)
-const element = <h1>Hello, world!</h1>;
-ReactDOM.render(
-  <Templat/>,
-  document.getElementById('root')
-);
+// const element = <h1>Hello, world!</h1>;
+
 
 function fn() {
   return new Promise((resolve,reject) => {
@@ -60,10 +70,13 @@ var hw = helloWorldGenerator();
 
 hw.next()
 @testable
-class MyClass {};
+class MyClass {
+  static isTestable: any;
+};
 
-function testable(target) {
+function testable(target: any) {
     target.isTestable = true;
 }
 console.log(MyClass.isTestable, 'ss')
 
+ReactDOM.render(<IntegerStep/>, document.getElementById("root"));
