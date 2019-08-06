@@ -2,6 +2,7 @@
 node_modules
 /build
 ./src/web.config.json
+.vscode
 /tests/e2e/videos/
 /tests/e2e/screenshots/
 .cache-loader

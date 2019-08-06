@@ -10,6 +10,7 @@ const ROOT_PATH = process.cwd(); // 获取到当前node运行的进程目录
 const DIST_PATH = path.resolve(ROOT_PATH, "dist"); // 获取到dist目录
 const ProgressBarPlugin = require('progress-bar-webpack-plugin') // 显示进度条
 const chalk = require('react-dev-utils/chalk')
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = merge(webpackCommon, {
 	mode: 'production',
 	output: {
@@ -43,6 +44,11 @@ module.exports = merge(webpackCommon, {
 			},
 		]
 	},
+	// configureWebpack: {
+		performance: {
+			hints:false
+		},
+	// },
 	externals: { // 配置通过第三方cdn引入
 	},
 	optimization: { // 分包
@@ -88,5 +94,12 @@ module.exports = merge(webpackCommon, {
 			chunkFilename: '[id].[hash].css'
 		}),
 		new OptimizeCSSAssetsPlugin(),
+		new CopyWebpackPlugin([
+			{
+				from: path.resolve(process.cwd(), "public/server.js"),
+				to: path.resolve(process.cwd(), "dist"),
+				ignore: ['.*']
+			}
+		])
 	]
 }) 
