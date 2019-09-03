@@ -2,21 +2,20 @@
  * webpack公共配置【对文件的处理以及解析】
  */
 const path = require('path')
-const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {ComponentLibrary} = require('../web.config.ts')
 module.exports = {
 	entry: {
-		build: path.resolve(process.cwd(), "src/index.tsx")
+		build: path.resolve(process.cwd(), 'src/index.tsx')
 	},
 	output: {
 		// 输出目录
-		path: path.resolve(__dirname, "../dist")
+		path: path.resolve(__dirname, '../dist')
 	},
 	resolve: {
-		extensions: [".js", ".jsx", ".css", ".scss", ".tsx", ".ts"],
+		extensions: ['.tsx', '.ts', '.js', '.jsx', '.css', '.scss' ],
 		alias: {
-			"src": path.resolve(process.cwd(), "src"),
+			'src': path.resolve(process.cwd(), 'src'),
 		}
 	},
 	module: {
@@ -63,30 +62,30 @@ module.exports = {
 					loader: 'babel-loader',
 					options: {
 						presets: [
-							"@babel/preset-react",
-							"@babel/preset-env",
-							"@babel/preset-typescript",
+							'@babel/preset-react',
+							'@babel/preset-env',
+							'@babel/preset-typescript',
 						],
 						plugins: [
 							[
-								"@babel/plugin-proposal-decorators",{"legacy": true}
+								'@babel/plugin-proposal-decorators',{'legacy': true}
 							],
 							[
-								"@babel/plugin-proposal-class-properties",
+								'@babel/plugin-proposal-class-properties',
 							],
-							["@babel/plugin-transform-classes",{"loose": true}],
-							["@babel/plugin-transform-runtime"],
+							['@babel/plugin-transform-classes',{'loose': true}],
+							['@babel/plugin-transform-runtime'],
 							[
-								"import", {
-									"libraryName": ComponentLibrary,
-									"libraryDirectory": 'es',
-	     						"style": 'css',
+								'import', {
+									'libraryName': ComponentLibrary,
+									'libraryDirectory': 'es',
+	     						'style': 'css',
 								}
 							]
 						]
 					}
 				},
-				exclude: path.resolve(process.cwd(), "node_modules")
+				exclude: path.resolve(process.cwd(), 'node_modules')
 			},
 			{
 				test: /\.(png|jpg|jpeg|gif|svg)/,
@@ -123,8 +122,7 @@ module.exports = {
 				removeAttributeQuotes:true,
 				removeComments:true
 			},
-			template: path.resolve(process.cwd(), "public/index.html"), // 指定模板路径
-		}),
-		new webpack.HotModuleReplacementPlugin(), // 对文件实现热更新
+			template: path.resolve(process.cwd(), 'public/index.html'), // 指定模板路径
+		})
 	],
 }
