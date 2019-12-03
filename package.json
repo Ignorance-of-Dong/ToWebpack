@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server --config ./config/webpack.config.dev.js --color --progress",
-    "build": "webpack --config ./config/webpack.config.prod.js --color --progress"
+    "test": "webpack-dev-server --config ./config/webpack.config.test.js --color",
+    "dev": "webpack-dev-server --config ./config/webpack.config.dev.js --color",
+    "build": "webpack --config ./config/webpack.config.prod.js --color"
   },
   "author": "",
   "license": "ISC",
@@ -42,11 +42,13 @@
     "react": "^16.8.6",
     "react-dev-utils": "^9.0.1",
     "react-dom": "^16.8.6",
+    "react-router-dom": "^5.0.1",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "typescript": "^3.5.3",
     "uglifyjs-webpack-plugin": "^2.1.3",
     "url-loader": "^2.1.0",
+    "video-react": "^0.14.1",
     "webpack": "^4.35.2",
     "webpack-cli": "^3.3.5",
     "webpack-dev-server": "^3.7.2",
@@ -72,6 +74,7 @@
   },
   "devDependencies": {
     "@types/react": "^16.8.24",
-    "@types/react-dom": "^16.8.5"
+    "@types/react-dom": "^16.8.5",
+    "eslint-plugin-react-hooks": "^2.0.1"
   }
 }

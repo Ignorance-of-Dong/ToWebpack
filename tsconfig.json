@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
+    "paths":{
+      "components/*": ["src/components/*"]
+    },
     "outDir": "./dist/",
     "sourceMap": false,
     "module": "commonjs",
