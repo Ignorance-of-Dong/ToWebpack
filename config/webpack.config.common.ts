@@ -1,9 +1,15 @@
-/**
- * webpack公共配置【对文件的处理以及解析】
+/*
+ * @Author: Mr.zheng
+ * @Date: 2019-12-04 10:10:00
+ * @LastEditors: Mr.zheng
+ * @LastEditTime: 2019-12-04 10:10:00
+ * @Description: webpack公共配置【对文件的处理以及解析】
  */
-const path = require('path')
+import path from 'path'
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { ComponentLibrary, alias } = require('../web.config.ts')
+import Config from '../web.config'
+
+let { ComponentLibrary, resolveAlias } = Config
 module.exports = {
 	entry: {
 		build: path.resolve(process.cwd(), 'src/index.tsx')
@@ -15,7 +21,7 @@ module.exports = {
 	resolve: {
 		extensions: ['.tsx', '.ts', '.js', '.jsx', '.css', '.scss' ],
 		alias: {
-			...alias
+			...resolveAlias
 		}
 	},
 	module: {

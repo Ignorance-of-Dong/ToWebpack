@@ -1,6 +1,13 @@
-// const webpack=require('webpack')
-const path = require('path')
-const merge = require('webpack-merge')
+/*
+ * @Author: Mr.zheng
+ * @Date: 2019-12-04 10:10:00
+ * @LastEditors: Mr.zheng
+ * @LastEditTime: 2019-12-04 10:10:00
+ * @Description: webpack打包文件
+ */
+import path from 'path'
+// const merge = require('webpack-merge')
+import merge from 'webpack-merge'
 const webpackCommon = require('./webpack.config.common')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // 清除上一次打包后的旧版文件
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // 将css单独打包出来
@@ -11,7 +18,7 @@ const DIST_PATH = path.resolve(ROOT_PATH, "build"); // 获取到dist目录
 const ProgressBarPlugin = require('progress-bar-webpack-plugin') // 显示进度条
 const chalk = require('react-dev-utils/chalk')
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const Config = require('../web.config.ts')
+import Config from '../web.config'
 
 module.exports = merge(webpackCommon, {
 	mode: 'production',

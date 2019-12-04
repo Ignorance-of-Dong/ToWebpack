@@ -7,7 +7,7 @@
  */
 const path = require('path')
 const interfaces = require('os').networkInterfaces(); // 在开发环境中获取局域网中的本机iP地址
-var IPAdress = '';
+var IPAdress: String = '';
 for (var devName in interfaces) {
 	var iface = interfaces[devName];
 	for (var i = 0; i < iface.length; i++) {
@@ -17,23 +17,24 @@ for (var devName in interfaces) {
 		}
 	}
 }
-// interface overalSituationConfig{
-// 	Serverport: String,
-// 	IPv4: String,
-// 	developmentModel: String,
-// 	ComponentLibrary: String,
-// 	vendor: Array<String>
-// }
+interface overalSituationConfig{
+	Serverport: String,
+	IPv4: String,
+	developmentModel: String,
+	ComponentLibrary: String,
+	vendor: Array<String>,
+	resolveAlias: Object
+}
 
-let Config = {
+let Config: overalSituationConfig = {
 	Serverport: "4000", 							// 端口
 	IPv4: IPAdress, 								// 本地IP地址
 	developmentModel: 'h5',							// 开发类型   h5 || pc 【没用！！】
 	ComponentLibrary: 'antd-mobile',				// 使用的UI组件   antd-mobile || antd
 	vendor: ['react'],                              // 对第三方包分包配置
-	alias: {
+	resolveAlias: {
 		"src": path.resolve(process.cwd(), 'src'),  // 配置别名
 		"components": path.resolve(process.cwd(), 'src', 'components')
 	}
 }
-module.exports = Config
+export default Config

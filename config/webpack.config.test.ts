@@ -1,11 +1,18 @@
-const path = require('path')
-const merge = require('webpack-merge')
-const webpack = require('webpack')
+/*
+ * @Author: Mr.zheng
+ * @Date: 2019-12-04 10:10:00
+ * @LastEditors: Mr.zheng
+ * @LastEditTime: 2019-12-04 10:10:00
+ * @Description: webpack测试文件
+ */
+import path from 'path'
+import merge from 'webpack-merge'
+import webpack from 'webpack'
 const webpackCommon = require('./webpack.config.common')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin') // 显示进度条
 const ROOT_PATH = process.cwd();
 const DIST_PATH = path.resolve(ROOT_PATH, "build");
-const Config = require('../web.config.ts')
+import Config from '../web.config'
 const chalk = require('react-dev-utils/chalk')
 
 
@@ -19,16 +26,15 @@ module.exports = merge(webpackCommon, {
         filename: "[name].[hash].js"
     },
     devtool: "source-map",
-    devServer: { // 本地为搭建了一个小型的静态文件服务器
+    devServer: {
         hot: true,
-        host: "0.0.0.0", // 可以使用手机访问
+        host: "0.0.0.0",                                                // 可以使用手机访问
         port: Config.Serverport,
-        compress: true, // 一切服务都将启动gzip压缩
-        clientLogLevel: "none", // 禁止浏览器控制台上输出热重载进度【这可能很繁琐】
-        noInfo: true, // 启用以后【其他信息会被隐藏而错误和警告仍会显示】
-        quiet: true, // 清除webpack【热重载默认在虚拟环境下打包，不在终端显示】
-        // proxy: {
-        //   // 代理到后端的服务地址，会拦截所有以api开头的请求地址
+        compress: true,                                                 // 一切服务都将启动gzip压缩
+        clientLogLevel: "none",                                         // 禁止浏览器控制台上输出热重载进度【这可能很繁琐】
+        noInfo: true,                                                   // 启用以后【其他信息会被隐藏而错误和警告仍会显示】
+        quiet: true,                                                    // 清除webpack【热重载默认在虚拟环境下打包，不在终端显示】
+        // proxy: {                                                     // 代理到后端的服务地址，会拦截所有以api开头的请求地址
         //   "/api": "http://localhost:4000"
         // }
     },

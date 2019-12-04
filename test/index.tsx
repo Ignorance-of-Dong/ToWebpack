@@ -9,8 +9,9 @@ import './style/index.css'
 import './style/index.scss'
 import * as ReactDOM from 'react-dom';
 import * as React from 'react'
-import IntegerStep from './c'
-
+import IntegerStep from './IntegerStep'
+import { Provider } from "mobx-react";
+import Pubcli from './store/public'
 
 
 
@@ -79,4 +80,8 @@ function testable(target: any) {
 }
 console.log(MyClass.isTestable, 'ss')
 
-ReactDOM.render(<IntegerStep/>, document.getElementById("root"));
+ReactDOM.render(
+  <Provider Pubcli={Pubcli}>
+<IntegerStep/>
+  </Provider>
+, document.getElementById("root"));
