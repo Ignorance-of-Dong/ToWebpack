@@ -24,7 +24,7 @@ module.exports = merge(webpackCommon, {
 	mode: 'production',
 	entry: {
 		build: path.resolve(process.cwd(), 'src/index.tsx'),
-		vendor: Config.vendor
+		vendor: Config.Vendor
 	},
 	output: {
 		path: DIST_PATH,

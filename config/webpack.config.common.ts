@@ -9,7 +9,7 @@ import path from 'path'
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 import Config from '../web.config'
 
-let { ComponentLibrary, resolveAlias } = Config
+let { ComponentLibrary, ResolveAlias } = Config
 module.exports = {
 	entry: {
 		build: path.resolve(process.cwd(), 'src/index.tsx')
@@ -21,7 +21,7 @@ module.exports = {
 	resolve: {
 		extensions: ['.tsx', '.ts', '.js', '.jsx', '.css', '.scss' ],
 		alias: {
-			...resolveAlias
+			...ResolveAlias
 		}
 	},
 	module: {

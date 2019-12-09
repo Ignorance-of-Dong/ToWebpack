@@ -20,19 +20,19 @@ for (var devName in interfaces) {
 interface overalSituationConfig{
 	Serverport: String,
 	IPv4: String,
-	developmentModel: String,
+	DevelopmentModel: String,
 	ComponentLibrary: String,
-	vendor: Array<String>,
-	resolveAlias: Object
+	Vendor: Array<String>,
+	ResolveAlias: Object
 }
 
 let Config: overalSituationConfig = {
 	Serverport: "4000", 							// 端口
 	IPv4: IPAdress, 								// 本地IP地址
-	developmentModel: 'h5',							// 开发类型   h5 || pc 【没用！！】
+	DevelopmentModel: 'h5',							// 开发类型   h5 || pc 【没用！！】
 	ComponentLibrary: 'antd-mobile',				// 使用的UI组件   antd-mobile || antd
-	vendor: ['react'],                              // 对第三方包分包配置
-	resolveAlias: {
+	Vendor: ['react'],                              // 对第三方包分包配置
+	ResolveAlias: {
 		"src": path.resolve(process.cwd(), 'src'),  // 配置别名
 		"components": path.resolve(process.cwd(), 'src', 'components')
 	}
