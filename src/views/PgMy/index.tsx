@@ -7,8 +7,10 @@ function PgMy(props: any) {
     let [collectionOrder, setcollectionOrder] = useState([])
     let [_condition, _setcondition] = useState(false)
     useEffect(() => {
+        let useMsg = sessionStorage.getItem('useMsg')
+        let uid = JSON.parse(useMsg).userId
         let parmas = {
-            uid: 532991430
+            uid: uid
         }
         apiuserplayer(parmas).then(res => {
             // console.log(res)

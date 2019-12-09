@@ -62,6 +62,17 @@
                 height: 100%;
             }
         }
+        .lyric-content {
+            width: 100%;
+            height: px2rem(100);
+            // background: #ccc;
+            position: absolute;
+            bottom: px2rem(30);
+            text-align: center;
+            align-items: center;
+            font-size: px2rem(40);
+            color: red;
+        }
     }
     .music-player-conster-ok {
         width: 100%;

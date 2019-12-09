@@ -4,7 +4,10 @@ import { Headers, Icons, Toast } from '../../components'
 import { Slider, Modal } from 'antd-mobile';
 import formatSeconds from '../../utils/formatSeconds'
 import query from '../../utils/useQuery'
-import { apisongurl } from '../../api'
+import { apisongurl, apisongdetail, apilyric } from '../../api'
+import Lyric from 'lyric-parser'
+
+var lyazy = '11111'
 interface currentProps{
     currenttime: number | string
 }
@@ -145,7 +148,7 @@ function EjectModule(props: ejectModuleProps) {
                         <div className="eject-module-wrap-title-left">
                             <Icons className='player-list-icon' un='&#xe7fe;' />
                             <span className='list-t'>播放列表</span>
-                            <span className='list-len'>(523)</span>
+                            <span className='list-len'>({songListDetail.length})</span>
                         </div>
                     </div>
                     <div className="eject-module-wrap-content-list" ref={listRef}>
@@ -162,7 +165,9 @@ function EjectModule(props: ejectModuleProps) {
                                             </div>
                                             <span style={{ color: _state === index ? 'red' : '' }}>&nbsp;-&nbsp;</span>
                                             <div className="eject-module-wrap-music-author" style={{ color: _state === index ? 'red' : '' }}>
-                                                {res.ar[0].name}
+                                                {/* {console.log(res)} */}
+                                                {/* {res.ar[0].name} */}
+                                                {res.ar ? res.ar[0].name : res.artists[0].name}
                                             </div>
                                         </div>
                                     </div>
@@ -183,7 +188,13 @@ function PgMusicPlayer(props: any) {
     let [showModule, setshowModule] = useState(true)
     let [songUrl, setsongUrl] = useState('')
     let [songDetails, setsongDetails] = useState(null)
+    let [lyric, setlyric] = useState([])
+    let [showlyric, setshowlyric] = useState('1111')
     let audiosRef = useRef(null)
+
+    useEffect(() => {
+        
+    }, [])
 
     /**
      * 执行播放 | 暂停
@@ -214,7 +225,7 @@ function PgMusicPlayer(props: any) {
     }, [statePlay])
 
     /**
-     * 获取歌曲的链接地址
+     * 获取歌曲的链接地址【歌曲详情，歌曲歌词】
      * @param id 歌曲id
      */
     function getsongurl(id) {
@@ -223,18 +234,22 @@ function PgMusicPlayer(props: any) {
         let params = {
             id: id
         }
-        let list = JSON.parse(sessionStorage.getItem('songListDetails'))
-        list.forEach((item) => {
-            if (item.id * 1 === id * 1) {
-                setsongDetails(item)
-            }
-        })
-        apisongurl(params).then(res => {
-            setsongUrl(res.data[0].url)  
-        }).catch(err => {
-            console.log(err, 'res')
+        try{
+            apisongdetail(params).then(res => {
+                console.log(res)
+                setsongDetails(res.songs[0])
+            })
+            apisongurl(params).then(res => {
+                setsongUrl(res.data[0].url)
+            })
+            apilyric(params).then(res => {
+                let l = new Lyric(res.lrc.lyric, () => { })
+                setlyric(l.lines)
+            })
+        }catch(err) {
             Toast('网络请求异常，请两分钟后再试', 2000)
-        })
+        }
+        
     }
 
     /**
@@ -302,6 +317,24 @@ function PgMusicPlayer(props: any) {
             }
         }
     }
+
+    /**
+     * 实时更新歌词
+     */
+    useEffect(() => {
+        let _index = 0
+        for (let i = 0; i < lyric.length - 1; i++) {
+            if (parseInt((lyric[i].time / 1000).toString()) === parseInt(currenttime)) {
+                if (i === 0) {
+                    _index = 0
+                } else {
+                    _index = i + 1
+                }
+                lyazy = lyric[_index].txt
+            }
+            setshowlyric(lyazy)
+        }
+    }, [currenttime, lyric])
     return (
         <>
             <div className="audios">
@@ -316,12 +349,16 @@ function PgMusicPlayer(props: any) {
             }}>
             </div>
             <div className="music-player-wraps">
-                <Headers props={props}>{songDetails ? songDetails.name : '加载中。。。'}</Headers>
+                <Headers props={props}>{songDetails ? songDetails.name : '加载中...'}</Headers>
                 <div className="music-player-content-logo">
                     <div className="rotate-music-logo-wraps" style={{ animationPlayState: statePlay ? 'running' : 'paused'}}>
                         <div className="rotate-music-logo">
                             <img src={songDetails ? songDetails.al.picUrl : 'http://p2.music.126.net/SHElx36maw8L6CIXfiNbFw==/109951164144982394.jpg'} alt="" />
                         </div>
+                        
+                    </div>
+                    <div className="lyric-content">
+                        {showlyric}
                     </div>
                 </div>
                 <div className="music-player-conster-ok">

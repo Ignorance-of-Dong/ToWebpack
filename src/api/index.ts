@@ -119,6 +119,50 @@ function apiuserplayer(params?) {
 function apilogincellphone(params: any) {
   return fetch.post(`/login/cellphone?phone=${params.phone}&password=${params.password}`, {})
 }
+
+/**
+ * 获取用户的歌单哪
+ */
+function apisearchhotdetai(params?) {
+  return fetch.post(`/search/hot/detail`, {})
+}
+
+
+/**
+ * 收索歌曲
+ */
+function apisearchsuggest(params?) {
+  return fetch.post(`/search?keywords=${params.keywords}`, {})
+}
+
+/**
+ * 获取歌曲详情
+ */
+function apisongdetail(params?) {
+  return fetch.post(`/song/detail?ids=${params.id}`, {})
+}
+
+/**
+ * 获取轮播图数据
+ */
+function apibanner(params?) {
+  return fetch.post(`/banner?type=2`, {})
+}
+
+/**
+ * 获取朋友动态
+ */
+function apievent(params?) {
+  return fetch.post(`/event?pagesize=30`, {})
+}
+
+/**
+ * 获取歌词
+ */
+function apilyric(params?) {
+  return fetch.post(`/lyric?id=${params.id}`, {})
+}
+
 export {
   apilogincellphone,
   apipersonalizedMv,
@@ -133,5 +177,11 @@ export {
   apimvdetails,
   apisimiMv,
   apifirstMv,
-  apiuserplayer
+  apiuserplayer,
+  apisearchhotdetai,
+  apisearchsuggest,
+  apisongdetail,
+  apibanner,
+  apievent,
+  apilyric
 }

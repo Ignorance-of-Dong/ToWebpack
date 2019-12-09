@@ -108,7 +108,9 @@
             .my-music-list-create-tip-pic {
                 width: px2rem(130);
                 height: px2rem(130);
-                background: lightblue;
+                // background: lightblue;
+                background: url('../../assets/images/timg.gif') no-repeat;
+                background-size: 100% 100%;
                 border-radius: px2rem(10);
                 img {
                     width: 100%;

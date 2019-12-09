@@ -58,6 +58,7 @@
             font-size: px2rem(30);
             padding-top: px2rem(20);
             color: #000;
+            text-align: center;
         }
     }
 }
@@ -114,7 +115,9 @@
                 .recommended-song-price {
                     width: px2rem(250);
                     height: px2rem(250);
-                    background: lightblue;
+                    // background: lightblue;
+                    background: url('../../assets/images/timg.gif') no-repeat;
+                    background-size: 100% 100%;
                     border-radius: px2rem(10);
                     overflow: hidden;
 
@@ -156,7 +159,8 @@
                 .recommended-song-price {
                     width: px2rem(280);
                     height: px2rem(280);
-                    background: lightblue;
+                    background: url('../../assets/images/timg.gif') no-repeat;
+                    background-size: 100% 100%;
                     border-radius: px2rem(10);
                     overflow: hidden;
 
@@ -198,6 +202,8 @@
                     .song-mv-tip-pri {
                         width: 100%;
                         height: px2rem(400);
+                        background: url('../../assets/images/timg.gif') no-repeat;
+                        background-size: 100% 100%;
 
                         img {
                             width: 100%;
@@ -238,6 +244,8 @@
                     .song-mv-tip-pri {
                         width: 100%;
                         height: px2rem(500);
+                        background: url('../../assets/images/timg.gif') no-repeat;
+                        background-size: 100% 100%;
 
                         img {
                             width: 100%;

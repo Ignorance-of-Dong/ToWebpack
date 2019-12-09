@@ -21,6 +21,7 @@ function PgPasswordInput(props: any) {
             // console.log(phone, '去登陆')
             apilogincellphone(params).then(res => {
                 sessionStorage.setItem('useMsg', JSON.stringify(res.profile))
+                sessionStorage.setItem('tabId', '1')
                 props.history.push('/index/fined')
             })
         }

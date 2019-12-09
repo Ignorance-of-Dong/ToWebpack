@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 // import { login } from '../../api/index.js'
-import { Headers, Toast } from 'components/index'
-// import { Icons } from 'src/components'
+import {Headers, Toast} from '../../../components'
 import './index.scss'
 function PgPhoneInput(props: any) {
     let [phone, setphone] = useState('')
@@ -20,7 +19,7 @@ function PgPhoneInput(props: any) {
             <Headers props={props}/>
             <div className="phone-wrap">
                 <p className="phone-tips">
-                    未注册的手机号登陆后自动创建账户1111
+                    未注册的手机号登陆后自动创建账户
                 </p>
                 <div className="phone-input">
                     <div className="phone-border">

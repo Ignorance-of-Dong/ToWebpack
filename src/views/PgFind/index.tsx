@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Carousel, WingBlank } from 'antd-mobile';
 import './index.scss'
 import { Icons, Toast } from '../../components'
-import { apipersonalizedSongList, apialbum, apifirstMv } from '../../api/index'
+import { apipersonalizedSongList, apialbum, apifirstMv, apibanner } from '../../api/index'
 
 function MvModule(props: any) {
     let res = props.res
@@ -54,22 +54,22 @@ function PgFind(props: any) {
     let [newDish, setnewDish] = useState([])
     let [personalizedMv, setpersonalizedMv] = useState([])
     let [_condition, _setcondition] = useState(false)
-    // let [isActual, setisActual] = useState(true)
-    let data = [
-        'http://p1.music.126.net/XFGTolOA4knoDuTjctkSHg==/109951164305143125.jpg',
-        'http://p1.music.126.net/cfHZQ40S6_ark3NLO2gQjw==/109951164304381122.jpg',
-        'http://p1.music.126.net/4jZ1L1qECEOsikW2JKsyHQ==/109951164304393164.jpg'
-    ]
+    let [_banner, _setbanner] = useState([])
     useEffect(() => {
         let getapipersonalizedSongList = async() => {
             let params = {
                 limit: 6
             }
-            await apipersonalizedSongList(params).then((res: any) => {
-                setrecommendedSongList(res.result)
-            }).catch(err => {
+            try{
+                await apipersonalizedSongList(params).then((res: any) => {
+                    setrecommendedSongList(res.result)
+                })
+                await apibanner().then(res => {
+                    _setbanner(res.banners)
+                })
+            }catch (err) {
                 Toast('网络请求异常，请两分钟后再试', 2000)
-            })
+            }
         }
         getapipersonalizedSongList()
         
@@ -110,14 +110,14 @@ function PgFind(props: any) {
                     beforeChange={() => { }}
                     afterChange={() => { }}
                 >
-                    {data.map(val => (
+                    {_banner.map(val => (
                         <span
                             key={val}
                             // href="javascript:;"
                             style={{ display: 'inline-block', width: '100%', height: '100%' }}
                         >
                             <img
-                                src={`${val}`}
+                                src={`${val.pic}`}
                                 alt=""
                                 style={{ width: '100%', verticalAlign: 'top', height: '100%' }}
                                 onLoad={() => {

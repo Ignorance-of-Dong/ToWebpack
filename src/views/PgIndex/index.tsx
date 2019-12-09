@@ -52,7 +52,9 @@ function LeftSilderAddTitle(props) {
                 mode="light"
                 icon={<Icon type="ellipsis" />}
                 rightContent={[
-                    <Icon key="0" type="search" style={{ marginRight: '10' }} />,
+                    <Icon key="0" type="search" style={{ marginRight: '10' }} onClick={() => {
+                        props.history.push('/search')
+                    }}/>,
                 ]}
                 onLeftClick={show}
             >
