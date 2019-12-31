@@ -26,6 +26,7 @@ interface overalSituationConfig{
 	ResolveAlias: Object
 }
 
+console.log(process.argv)
 let Config: overalSituationConfig = {
 	Serverport: "4000", 							// 端口
 	IPv4: IPAdress, 								// 本地IP地址

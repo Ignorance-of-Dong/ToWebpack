@@ -6,7 +6,8 @@
   "scripts": {
     "test": "webpack-dev-server --config ./config/webpack.config.test.ts --color",
     "dev": "webpack-dev-server --config ./config/webpack.config.dev.ts --color",
-    "build": "webpack --config ./config/webpack.config.prod.ts --color"
+    "build": "webpack --config ./config/webpack.config.prod.ts --color",
+    "buildup": "webpack --config ./config/webpack.config.all.ts --color"
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +20,7 @@
     "copy-webpack-plugin": "^5.0.5",
     "css-loader": "^3.2.1",
     "file-loader": "^5.0.2",
+    "glob": "^7.1.6",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.8.0",
     "mobx": "^5.15.0",
@@ -33,9 +35,9 @@
     "react-router-dom": "^5.1.2",
     "sass-loader": "^8.0.0",
     "style-loader": "^1.0.1",
+    "terser-webpack-plugin": "^2.3.1",
     "ts-node": "^8.5.4",
     "typescript": "^3.7.2",
-    "uglifyjs-webpack-plugin": "^2.2.0",
     "url-loader": "^3.0.0",
     "video-react": "^0.14.1",
     "webpack": "^4.41.2",

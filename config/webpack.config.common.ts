@@ -15,7 +15,6 @@ module.exports = {
 		build: path.resolve(process.cwd(), 'src/index.tsx')
 	},
 	output: {
-		// 输出目录
 		path: path.resolve(__dirname, '../build')
 	},
 	resolve: {
@@ -128,6 +127,7 @@ module.exports = {
 				removeAttributeQuotes:true,
 				removeComments:true
 			},
+			chunks: ['build'],
 			template: path.resolve(process.cwd(), 'public/index.html'), // 指定模板路径
 		})
 	],
